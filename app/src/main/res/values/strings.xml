@@ -3,4 +3,8 @@
     <string name="app_name">DiplomaNotepad</string>
     <string name="add_label">Добавить</string>
 
+    <string name="titlePlaceholder">Заголовок</string>
+    <string name="textPlaceholder">Заметка</string>
+    <string name="hasDeadLineLabel">Задача со сроками</string>
+
 </resources>

@@ -8,15 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 import ru.sterlikoff.diplomanotepad.R;
 import ru.sterlikoff.diplomanotepad.models.Note;
 
 public class NoteAdapter extends BaseAdapter {
 
-    private List<Note> list;
     private LayoutInflater inflater;
+    private List<Note> list;
 
     public NoteAdapter(List<Note> list, Context context) {
 
@@ -53,10 +52,16 @@ public class NoteAdapter extends BaseAdapter {
         TextView titleView = currentView.findViewById(R.id.note_list_item_title);
         TextView textView = currentView.findViewById(R.id.note_list_item_text);
         TextView dateView = currentView.findViewById(R.id.notice_list_item_date);
+        TextView idView = currentView.findViewById(R.id.note_list_item_id);
 
-        titleView.setText(note.title);
-        textView.setText(note.text);
-        dateView.setText(note.dateDeadLine.toString());
+        if (note != null) {
+
+            titleView.setText(note.title);
+            textView.setText(note.text);
+            dateView.setText(note.dateDeadLine.toString());
+            idView.setText("# " + Integer.toString(note.getId()));
+
+        }
 
         return currentView;
     }

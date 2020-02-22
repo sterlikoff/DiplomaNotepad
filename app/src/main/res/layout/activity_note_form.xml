@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="20dp"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:hint="@string/titlePlaceholder"
+        android:id="@+id/edit_note_form_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        />
+
+    <EditText
+        android:hint="@string/textPlaceholder"
+        android:id="@+id/edit_note_form_text"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        style="@style/myButton"
+        android:id="@+id/btn_note_form_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_label" />
+
+</LinearLayout>
