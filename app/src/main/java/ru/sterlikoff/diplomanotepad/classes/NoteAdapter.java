@@ -1,5 +1,7 @@
 package ru.sterlikoff.diplomanotepad.classes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +65,7 @@ public class NoteAdapter extends BaseAdapter {
 
             titleView.setText(note.title);
             textView.setText(note.text);
-            dateView.setText(note.dateDeadLine.toString());
+            if (note.dateDeadLine != null) dateView.setText(note.dateDeadLine.toString());
             idView.setText("# " + Integer.toString(note.getId()));
 
             currentView.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +78,41 @@ public class NoteAdapter extends BaseAdapter {
 
                     context.startActivityForResult(intent, App.RESULT_UPDATE_NOTE);
 
+                }
+
+            });
+
+            currentView.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                    builder.setMessage(R.string.deleteNoteConfirmation);
+
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            App.getNoteRepository().deleteById(note.getId());
+
+                        }
+
+                    });
+
+                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                    return false;
                 }
 
             });

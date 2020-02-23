@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ru.sterlikoff.diplomanotepad.classes.NoteAdapter;
 import ru.sterlikoff.diplomanotepad.components.App;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         list = new ArrayList<>(App.getNoteRepository().findAll().values());
+        Collections.sort(list);
+
         adapter = new NoteAdapter(list, this);
 
         listView.setAdapter(adapter);
@@ -82,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             list.add(model);
+
+                            Collections.sort(list);
                             adapter.notifyDataSetChanged();
 
                         }

@@ -7,4 +7,9 @@
     <string name="textPlaceholder">Заметка</string>
     <string name="hasDeadLineLabel">Задача со сроками</string>
 
+    <string name="deleteNoteConfirmation">Удалить заметку?</string>
+
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
 </resources>

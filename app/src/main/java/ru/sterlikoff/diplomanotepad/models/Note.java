@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Date;
 
-public class Note {
+public class Note implements Comparable<Note> {
 
     private int id;
 
@@ -13,6 +13,7 @@ public class Note {
 
     private Date dateCreated;
     public Date dateDeadLine;
+    private Note o;
 
     public Note() {
 
@@ -73,6 +74,25 @@ public class Note {
         } catch (JSONException e) {
 
         }
+
+    }
+
+    public boolean equals(Note obj) {
+
+        if (obj == null) return false;
+        return this.id == obj.getId();
+
+    }
+
+    @Override
+    public int compareTo(Note o) {
+
+        if (o == null) return -1;
+
+        if (this.equals(o)) return 0;
+        if (this.id > o.getId()) return 1;
+
+        return -1;
 
     }
 
