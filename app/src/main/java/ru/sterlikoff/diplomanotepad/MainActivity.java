@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         switch (resultCode) {
 
             case App.RESULT_NEW_NOTE:
+            case App.RESULT_UPDATE_NOTE:
 
                 if (data != null) {
 
@@ -73,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
                         Note model = App.getNoteRepository().findById(id);
 
                         if (model != null) {
+
+                            int pos = list.indexOf(model);
+
+                            if (pos > - 1) {
+                                list.remove(pos);
+                            }
 
                             list.add(model);
                             adapter.notifyDataSetChanged();

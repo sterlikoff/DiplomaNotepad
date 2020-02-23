@@ -21,6 +21,8 @@ public class NoteFormActivity extends AppCompatActivity {
     EditText editNoteTitle;
     EditText editNoteText;
 
+    private int currentId;
+
     protected void initViews() {
 
         submitButton = findViewById(R.id.btn_note_form_submit);
@@ -32,7 +34,10 @@ public class NoteFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Note model = new Note(editNoteTitle.getText().toString(), editNoteText.getText().toString(), new Date());
+                Note model = (currentId > 0) ? App.getNoteRepository().findById(currentId) : new Note();
+
+                model.title = editNoteTitle.getText().toString();
+                model.text = editNoteText.getText().toString();
 
                 if (model.validate()) {
 
@@ -68,6 +73,29 @@ public class NoteFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_form);
 
         initViews();
+
+        int id = this.getIntent().getIntExtra("id", 0);
+
+        if (id > 0) {
+
+            Note model = App.getNoteRepository().findById(id);
+
+            if (model == null) {
+
+                finish();
+
+            } else {
+
+                currentId = id;
+
+                editNoteTitle.setText(model.title);
+                editNoteText.setText(model.text);
+
+            }
+
+
+
+        }
 
     }
 }

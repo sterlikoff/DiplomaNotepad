@@ -14,6 +14,10 @@ public class Note {
     private Date dateCreated;
     public Date dateDeadLine;
 
+    public Note() {
+
+    }
+
     public Note(int id) {
         this.id = id;
     }
