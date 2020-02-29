@@ -1,8 +1,5 @@
-package ru.sterlikoff.diplomanotepad.classes;
+package ru.sterlikoff.diplomanotepad.adapters;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +9,20 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.sterlikoff.diplomanotepad.MainActivity;
-import ru.sterlikoff.diplomanotepad.NoteFormActivity;
 import ru.sterlikoff.diplomanotepad.R;
-import ru.sterlikoff.diplomanotepad.components.App;
 import ru.sterlikoff.diplomanotepad.models.Note;
 
 public class NoteAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private List<Note> list;
-    private MainActivity context;
+    private MainActivity.OnNoteClickEvents events;
 
-    public NoteAdapter(List<Note> list, MainActivity context) {
+    public NoteAdapter(List<Note> list, MainActivity context, MainActivity.OnNoteClickEvents events) {
 
         this.list = list;
         this.inflater = LayoutInflater.from(context);
-        this.context = context;
+        this.events = events;
 
     }
 
@@ -72,12 +67,7 @@ public class NoteAdapter extends BaseAdapter {
 
                 @Override
                 public void onClick(View v) {
-
-                    Intent intent = new Intent(context, NoteFormActivity.class);
-                    intent.putExtra("id", note.getId());
-
-                    context.startActivityForResult(intent, App.RESULT_UPDATE_NOTE);
-
+                    events.onClick(note);
                 }
 
             });
@@ -86,33 +76,7 @@ public class NoteAdapter extends BaseAdapter {
 
                 @Override
                 public boolean onLongClick(View v) {
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-                    builder.setMessage(R.string.deleteNoteConfirmation);
-
-                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            App.getNoteRepository().deleteById(note.getId());
-
-                        }
-
-                    });
-
-                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-
-                    });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
-                    return false;
+                    return events.onLongClick(note);
                 }
 
             });
@@ -120,6 +84,7 @@ public class NoteAdapter extends BaseAdapter {
         }
 
         return currentView;
+
     }
 
 }
