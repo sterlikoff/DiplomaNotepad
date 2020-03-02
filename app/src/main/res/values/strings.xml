@@ -1,10 +1,15 @@
 <resources>
 
     <string name="app_name">DiplomaNotepad</string>
+
     <string name="add_label">Добавить</string>
+    <string name="save_label">Сохранить</string>
+
+    <string name="settingsLabel">Настройки</string>
 
     <string name="titlePlaceholder">Заголовок</string>
     <string name="textPlaceholder">Заметка</string>
+    <string name="pinPlaceholder">Введите новый PIN-код</string>
     <string name="hasDeadLineLabel">Задача со сроками</string>
 
     <string name="deleteNoteConfirmation">Удалить заметку?</string>
@@ -27,5 +32,6 @@
 
     <string name="clearPlaceholder">C</string>
     <string name="incorrectPinMessage">Неверный PIN-код</string>
+    <string name="minPingLengthMessage">Минимальная длина PIN-кода: 4 цифры</string>
 
 </resources>
