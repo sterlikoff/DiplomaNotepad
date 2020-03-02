@@ -2,7 +2,6 @@ package ru.sterlikoff.diplomanotepad.components;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -11,11 +10,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.sterlikoff.diplomanotepad.MainActivity;
 import ru.sterlikoff.diplomanotepad.models.Note;
 
 public class FileNoteRepository implements NoteRepository {

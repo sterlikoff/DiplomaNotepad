@@ -86,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
 
                         App.getNoteRepository().deleteById(note.getId());
 
+                        int pos = list.indexOf(note);
+
+                        if (pos > -1) {
+                            list.remove(pos);
+                        }
+
+                        Collections.sort(list);
+                        adapter.notifyDataSetChanged();
+
                     }
 
                 });
