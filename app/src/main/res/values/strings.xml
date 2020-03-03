@@ -11,6 +11,7 @@
     <string name="textPlaceholder">Заметка</string>
     <string name="pinPlaceholder">Введите новый PIN-код</string>
     <string name="hasDeadLineLabel">Задача со сроками</string>
+    <string name="deadLinePlaceholder">Срок выполнения задачи</string>
 
     <string name="deleteNoteConfirmation">Удалить заметку?</string>
 
@@ -33,5 +34,10 @@
     <string name="clearPlaceholder">C</string>
     <string name="incorrectPinMessage">Неверный PIN-код</string>
     <string name="minPingLengthMessage">Минимальная длина PIN-кода: 4 цифры</string>
+
+    <string name="savingErrorMessage">При сохранении заметки произошла ошибка</string>
+    <string name="emptyNoteErrorMessage">Заметка не может быть пустой</string>
+
+    <string name="dateFormat">d.MM.Y</string>
 
 </resources>

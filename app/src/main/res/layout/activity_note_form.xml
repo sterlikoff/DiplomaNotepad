@@ -15,20 +15,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:inputType="text"
         />
 
-    <EditText
-        android:hint="@string/textPlaceholder"
-        android:id="@+id/edit_note_form_text"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="20dp" />
-
-    <Button
-        style="@style/myButton"
-        android:id="@+id/btn_note_form_submit"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_label" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_note_form_deadline_date"
+            android:hint="@string/deadLinePlaceholder"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:padding="6dp"
+            android:layout_marginStart="10dp"
+            >
+
+            <ImageButton
+                android:id="@+id/btn_choose_date"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_date_range_white_24dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_note_form_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:hint="@string/textPlaceholder"
+        android:inputType="textMultiLine"
+        android:textAlignment="gravity" />
 
 </LinearLayout>

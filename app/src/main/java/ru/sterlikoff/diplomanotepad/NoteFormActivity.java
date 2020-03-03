@@ -1,65 +1,80 @@
 package ru.sterlikoff.diplomanotepad;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import ru.sterlikoff.diplomanotepad.components.App;
 import ru.sterlikoff.diplomanotepad.models.Note;
 
 public class NoteFormActivity extends AppCompatActivity {
 
-    Button submitButton;
+    ImageButton chooseDateButton;
+
     EditText editNoteTitle;
     EditText editNoteText;
+    EditText editNoteDeadLineDate;
+
+    DateFormat dateFormat;
 
     private int currentId;
 
     protected void initViews() {
 
-        submitButton = findViewById(R.id.btn_note_form_submit);
+        chooseDateButton = findViewById(R.id.btn_choose_date);
 
         editNoteTitle = findViewById(R.id.edit_note_form_title);
         editNoteText = findViewById(R.id.edit_note_form_text);
+        editNoteDeadLineDate = findViewById(R.id.edit_note_form_deadline_date);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        dateFormat = new SimpleDateFormat("d.M.Y", Locale.getDefault());
+
+        chooseDateButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-                Note model = (currentId > 0) ? App.getNoteRepository().findById(currentId) : new Note();
+                Calendar todayCalendar = Calendar.getInstance();
 
-                model.title = editNoteTitle.getText().toString();
-                model.text = editNoteText.getText().toString();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(NoteFormActivity.this,
 
-                if (model.validate()) {
+                        new DatePickerDialog.OnDateSetListener() {
 
-                    if (App.getNoteRepository().save(model)) {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                        Intent intent = new Intent();
-                        intent.putExtra("id", model.getId());
+                                Calendar calendar = new GregorianCalendar(year, month, dayOfMonth);
+                                editNoteDeadLineDate.setText(dateFormat.format(calendar.getTime()));
 
-                        setResult(App.RESULT_NEW_NOTE, intent);
-                        finish();
+                            }
 
-                    } else {
+                        },
 
-                        Toast.makeText(NoteFormActivity.this, "При сохранении заметки произошла ошибка", Toast.LENGTH_LONG).show();
+                        todayCalendar.get(Calendar.YEAR),
+                        todayCalendar.get(Calendar.MONTH),
+                        todayCalendar.get(Calendar.DAY_OF_MONTH)
 
-                    }
+                );
 
-                } else {
-
-                    Toast.makeText(NoteFormActivity.this, "Что то пошло не так", Toast.LENGTH_LONG).show();
-
-                }
+                datePickerDialog.show();
 
             }
         });
@@ -98,4 +113,72 @@ public class NoteFormActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.note_form_menu, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.btn_save:
+
+                Note model = (currentId > 0) ? App.getNoteRepository().findById(currentId) : new Note();
+
+                model.title = editNoteTitle.getText().toString();
+                model.text = editNoteText.getText().toString();
+
+                String deadLineDateString = editNoteDeadLineDate.getText().toString();
+
+                if (!deadLineDateString.isEmpty()) {
+
+                    try {
+
+                        model.dateDeadLine = dateFormat.parse(deadLineDateString);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                if (model.validate()) {
+
+                    if (App.getNoteRepository().save(model)) {
+
+                        Intent intent = new Intent();
+                        intent.putExtra("id", model.getId());
+
+                        setResult(App.RESULT_NEW_NOTE, intent);
+                        finish();
+
+                    } else {
+
+                        Toast.makeText(NoteFormActivity.this, R.string.savingErrorMessage, Toast.LENGTH_LONG).show();
+
+                    }
+
+                } else {
+
+                    Toast.makeText(NoteFormActivity.this, R.string.emptyNoteErrorMessage, Toast.LENGTH_LONG).show();
+
+                }
+
+                return true;
+
+            default:
+                return true;
+
+        }
+
+    }
+
 }

@@ -19,54 +19,41 @@
 
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:orientation="vertical"
+            >
 
             <TextView
-                android:id="@+id/note_list_item_id"
-                tools:text="# 203"
+                android:id="@+id/note_list_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/note_list_item_id"
-                android:id="@+id/note_list_item_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:textSize="22sp"
-                tools:text="Заголовок" />
-
+                android:layout_marginBottom="10dp"
+                tools:text="Заголовок"
+                />
 
             <TextView
-                app:layout_constraintTop_toBottomOf="@+id/note_list_item_title"
-                app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/note_list_item_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 tools:text="Описание заметки"
                 android:textSize="18sp"
                 />
 
             <TextView
                 android:id="@+id/notice_list_item_date"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/note_list_item_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@color/lightGray"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/lightGray"
                 tools:text="10/12/2020 00:50"
+                android:textAlignment="textEnd"
                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

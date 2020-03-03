@@ -1,5 +1,8 @@
 package ru.sterlikoff.diplomanotepad.models;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Date;
@@ -11,9 +14,7 @@ public class Note implements Comparable<Note> {
     public String title;
     public String text;
 
-    private Date dateCreated;
     public Date dateDeadLine;
-    private Note o;
 
     public Note() {
 
@@ -23,16 +24,8 @@ public class Note implements Comparable<Note> {
         this.id = id;
     }
 
-    public Note(String title, String text, Date dateDeadLine) {
-
-        this.title = title;
-        this.text = text;
-        this.dateDeadLine = dateDeadLine;
-
-    }
-
     public boolean validate() {
-        return !title.isEmpty() && !text.isEmpty();
+        return !text.isEmpty();
     }
 
     public int getId() {
@@ -85,12 +78,21 @@ public class Note implements Comparable<Note> {
     }
 
     @Override
-    public int compareTo(Note o) {
+    public int compareTo(@Nullable Note o) {
 
         if (o == null) return -1;
 
-        if (this.equals(o)) return 0;
-        if (this.id > o.getId()) return 1;
+        if (o.dateDeadLine == null || this.dateDeadLine == null) {
+
+            if (this.equals(o)) return 0;
+            if (this.id > o.getId()) return 1;
+
+            return -1;
+
+        }
+
+        if (o.dateDeadLine.equals(this.dateDeadLine)) return 0;
+        if (o.dateDeadLine.before(this.dateDeadLine)) return 1;
 
         return -1;
 
