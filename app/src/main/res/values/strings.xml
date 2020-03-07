@@ -38,7 +38,7 @@
     <string name="savingErrorMessage">При сохранении заметки произошла ошибка</string>
     <string name="emptyNoteErrorMessage">Заметка не может быть пустой</string>
 
-    <string name="dateFormat">d.MM.Y</string>
+    <string name="dateFormat">dd.MM.yyyy</string>
 
     <string name="createPinLabel">Создать PIN-код</string>
     <string name="editPinLabel">Изменить PIN-код</string>

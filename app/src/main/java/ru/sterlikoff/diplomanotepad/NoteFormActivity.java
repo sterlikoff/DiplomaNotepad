@@ -45,7 +45,7 @@ public class NoteFormActivity extends AppCompatActivity {
         editNoteText = findViewById(R.id.edit_note_form_text);
         editNoteDeadLineDate = findViewById(R.id.edit_note_form_deadline_date);
 
-        dateFormat = new SimpleDateFormat("d.M.Y", Locale.getDefault());
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
 
         chooseDateButton.setOnClickListener(new View.OnClickListener() {
 

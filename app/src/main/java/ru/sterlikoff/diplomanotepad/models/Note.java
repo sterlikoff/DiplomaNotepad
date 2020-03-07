@@ -1,11 +1,15 @@
 package ru.sterlikoff.diplomanotepad.models;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Note implements Comparable<Note> {
 
@@ -42,9 +46,11 @@ public class Note implements Comparable<Note> {
 
         try {
 
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
             json.put("title", this.title);
             json.put("text", this.text);
-            json.put("dateDeadLine", this.dateDeadLine);
+            json.put("dateDeadLine", dateFormat.format(this.dateDeadLine));
 
         } catch (JSONException e) {
 
@@ -60,12 +66,21 @@ public class Note implements Comparable<Note> {
 
         try {
 
-            title = object.getString("title");
-            text = object.getString("text");
-            dateDeadLine = new Date(object.getString("dateDeadLine"));
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+            this.title = object.getString("title");
+            this.text = object.getString("text");
+
+            try {
+
+                this.dateDeadLine = dateFormat.parse(object.getString("dateDeadLine"));
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         } catch (JSONException e) {
-
+            e.printStackTrace();
         }
 
     }
