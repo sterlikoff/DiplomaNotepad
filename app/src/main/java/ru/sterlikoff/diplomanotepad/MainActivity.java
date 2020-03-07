@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.btn_settings:
 
-                Intent intent = new Intent(this, SettingsActivity.class);
+                Intent intent = new Intent(this, SetPinActivity.class);
                 startActivity(intent);
 
                 return true;

@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import ru.sterlikoff.diplomanotepad.components.App;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SetPinActivity extends AppCompatActivity {
 
     EditText pinEdit;
 
@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 } else {
 
-                    Toast.makeText(SettingsActivity.this, R.string.minPingLengthMessage, Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetPinActivity.this, R.string.minPingLengthMessage, Toast.LENGTH_LONG).show();
 
                 }
 
@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_set_pin);
 
         initViews();
 
