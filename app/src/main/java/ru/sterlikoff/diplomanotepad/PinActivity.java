@@ -22,7 +22,20 @@ public class PinActivity extends AppCompatActivity {
 
         if (App.getKeyStore().checkPin(currentPin)) {
 
-            startApp();
+            switch (this.getIntent().getIntExtra("resultCode", 0)) {
+
+                case App.RESULT_PIN_CODE:
+
+                    setResult(App.RESULT_PIN_CODE);
+                    finish();
+
+                    break;
+
+                default:
+                    startApp();
+
+            }
+
 
         } else {
 
@@ -45,7 +58,7 @@ public class PinActivity extends AppCompatActivity {
 
     public void onNumberButtonClick(View v) {
 
-        Button button = (Button)v;
+        Button button = (Button) v;
         currentPin += button.getText().toString();
 
         updatePinViews();
